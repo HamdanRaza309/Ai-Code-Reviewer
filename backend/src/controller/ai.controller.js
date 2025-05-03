@@ -1,29 +1,29 @@
 import generateContent from "../services/ai.service.js"; // Import the function to interact with the API
 
-const getResponse = async (req, res) => {
+const codeReview = async (req, res) => {
     try {
-        // Extract the user prompt from the query parameters
-        const userPrompt = req.query.userPrompt;
+        // Extract the user code from the query parameters
+        const code = req.body.code;
 
-        // Log the user prompt for debugging purposes
-        console.log(userPrompt);
+        // Log the user code for debugging purposes
+        console.log(code);
 
-        // If there's no prompt provided, return an error response
-        if (!userPrompt) {
+        // If there's no code provided, return an error response
+        if (!code) {
             return res.status(400).json({
                 success: false,
-                message: "No prompt provided. Please provide a valid prompt."
+                message: "No code provided. Please provide a valid code."
             });
         }
 
         // Call the generateContent function to get the response from the API
-        const response = await generateContent(userPrompt);
+        const codeReview = await generateContent(code);
 
         // Log the API response for debugging
-        console.log(response);
+        console.log(codeReview);
 
         // If no response is received, return an error response
-        if (!response) {
+        if (!codeReview) {
             return res.status(500).json({
                 success: false,
                 message: "Failed to get a response from the AI."
@@ -34,7 +34,7 @@ const getResponse = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: "Response generated successfully.",
-            response: response
+            response: codeReview
         });
 
     } catch (error) {
@@ -49,4 +49,4 @@ const getResponse = async (req, res) => {
     }
 };
 
-export { getResponse };
+export { codeReview };

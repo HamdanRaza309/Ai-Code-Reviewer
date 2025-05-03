@@ -4,6 +4,7 @@ import aiRouter from './routes/ai.routes.js';
 
 const app = express();
 
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send('Ai Code Reviewer')
