@@ -3,6 +3,7 @@ import prism from 'prismjs'
 import "prismjs/themes/prism-tomorrow.css";
 import Editor from 'react-simple-code-editor'
 import './App.css'
+import axios from 'axios'
 
 function App() {
 
@@ -10,11 +11,16 @@ function App() {
     return 1 + 1
   }`)
 
+  async function reviewCode() {
+    const res = await axios.post(`http://localhost:3000/ai/code-review`, { code })
+
+    console.log(res.data.response);
+
+  }
+
   useEffect(() => {
     prism.highlightAll()
   })
-
-
 
   return (
     <>
@@ -36,7 +42,7 @@ function App() {
               }}
             />
           </div>
-          <div className="review">Review</div>
+          <div onClick={reviewCode} className="review">Review</div>
         </div>
         <div className="right"></div>
       </main>
