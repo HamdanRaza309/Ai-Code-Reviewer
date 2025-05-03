@@ -1,8 +1,11 @@
-import { GoogleGenAI } from "@google/genai";
-import { GOOGLE_GEMINI_KEY } from "../../constants.js";
+import dotenv from 'dotenv'
+// Load environment variables
+dotenv.config();
 
-const ai = new GoogleGenAI({ apiKey: GOOGLE_GEMINI_KEY });
-// console.log(GOOGLE_GEMINI_KEY);
+
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_KEY });
 
 async function generateContent(code) {
     const response = await ai.models.generateContent({
